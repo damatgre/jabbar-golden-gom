@@ -52,7 +52,7 @@ function endQuiz() {
 //time management, stopping quiz on timeout
 function updateTime() {
   time--;
-  timerEl.textContent = time;
+  timerEl.textContent = "Time Left: " + time;
   if (time <= 0) {
     endQuiz();
   }
@@ -98,7 +98,7 @@ function nextQuestion() {
   renderQuestion();
 }
 
-
+//controls response to submitted answer
 function checkAnswer(event) {
   clearInterval(intervalId);
   if (event.target.matches("li")) {
@@ -117,3 +117,8 @@ function checkAnswer(event) {
 
 renderQuestion();
 optionListEl.addEventListener("click", checkAnswer);
+
+
+//need to create something to display high score
+//create input of high score with initials
+//create localStorage to store high scores
