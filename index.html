@@ -7,20 +7,27 @@
   <link rel="stylesheet" href="./assets/style.css" />
   <title>Marvel Character Quiz</title>
 </head>
-<header>
-  <div id="timer"></div>
-</header>
 
 <body>
+  
+  <header>
+    <div id="timer"></div>
+  </header>
 
   <div class="content">
-    <div id="timer"></div>
+    
+    <div id="welcome-page"></div>
 
-    <div id="question"></div>
+    <div id="quiz" class="hide">
+      <div id="question"></div>
 
-    <ul id="option-list"></ul>
+      <ul id="option-list"></ul>
 
-    <div id="question-result"></div>
+      <div id="question-result"></div>
+    </div>
+
+    <div id="endgame" class="hide"></div>
+
   </div>
 
   <script src="./script.js"></script>

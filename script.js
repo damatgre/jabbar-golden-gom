@@ -32,6 +32,9 @@ var questionEl = document.querySelector("#question");
 var optionListEl = document.querySelector("#option-list");
 var questionResultEl = document.querySelector("#question-result");
 var timerEl = document.querySelector("#timer");
+var welcome = document.getElementById("welcome-page");
+var quizDiv = document.getElementById("quiz");
+var endgame = document.getElementById("endgame");
 
 //tracking question and correct answers
 var questionIndex = 0;
@@ -42,12 +45,7 @@ var time = 75;
 //how time moves
 var intervalId;
 
-//what happens at the end of the game
-function endQuiz() {
-  clearInterval(intervalId);
-  var body = document.body;
-  body.innerHTML = "Game over, You scored " + correctCount;
-}
+
 
 //time management, stopping quiz on timeout
 function updateTime() {
@@ -65,21 +63,21 @@ function renderQuestion() {
     updateTime();
     return;
   }
-
+  
   //setting pace
   intervalId = setInterval(updateTime, 1000);
   
   //element to show which question we are on
   questionEl.textContent = questions[questionIndex].question;
-
+  
   //answer choices/results made to be reusable
   optionListEl.innerHTML = "";
   questionResultEl.innerHTML = "";
-
-
+  
+  
   var choices = questions[questionIndex].choices;
   var choicesLenth = choices.length;
-
+  
   //putting in list items/answer choices
   for (var i = 0; i < choicesLenth; i++) {
     var questionListItem = document.createElement("li");
@@ -115,7 +113,80 @@ function checkAnswer(event) {
   setTimeout(nextQuestion, 2000);
 }
 
-renderQuestion();
+//welcome page and button
+function prequiz() {
+  
+  var welcome = document.getElementById("welcome-page");
+  welcome.className = "welcome-marvel";
+  
+  
+  var welcomeH2 = document.createElement("h2");
+  welcomeH2.textContent = "Welcome to the Marvel Quiz";
+  welcome.appendChild(welcomeH2);
+  
+  var welcomeP = document.createElement("p");
+  welcomeP.textContent = "Think you know the Marvel Cinematic Universe? Let's put your knowledge to the test! Go ahead and click the Start button.";
+  welcome.appendChild(welcomeP);
+  
+  var startButton = document.createElement("button");
+  startButton.classList.add("btn");
+  startButton.textContent = "Start";
+  startButton.onclick = startQuiz;
+  welcome.appendChild(startButton);
+  
+}
+
+//run through quiz
+function startQuiz() {
+  welcome.classList.add("hide");
+  
+  quizDiv.classList.remove("hide");
+  
+  renderQuestion();
+  
+}
+
+//what happens at the end of the game
+function endQuiz() {
+  clearInterval(intervalId);
+
+  quizDiv.classList.add("hide");
+  
+  var final = document.getElementById("endgame");
+  endgame.className = "endgame-end"
+
+  var endH2 = document.createElement("h2");
+  endH2.textContent = "You're in the Endgame now."
+  endH2.className = "endgame-h2"
+  final.appendChild(endH2);
+
+  var endP = document.createElement("p");
+  endP.textContent = "You scored " + correctCount + " this round";
+  endP.className = "endgame-p"
+  final.appendChild(endP);
+
+  endInput = document.createElement("input");
+  endInput.type = "text";
+  endInput.value = "";
+  final.appendChild(endInput);
+
+  var endButton = document.createElement("button");
+  endButton.classList.add("btn");
+  endButton.textContent = "Submit";
+  endButton.onclick = storeLocal;
+  endButton.addEventListener("click", storeLocal);
+  final.appendChild(endButton);
+}
+
+function storeLocal() {
+  localStorage.setItem("score" , correctCount);
+  localStorage.setItem("name", JSON.stringify(endInput.value));
+
+}
+
+prequiz();
+
+
 optionListEl.addEventListener("click", checkAnswer);
 
 

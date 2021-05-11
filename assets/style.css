@@ -23,10 +23,11 @@ header {
 }
 
 .content {
-    color: var(--secondary-color);
+    color: black;
     margin: auto;
     width: 40%;
-    border: 3px solid green;
+    border: 3px solid pink;
+    border-radius: 5px;
     padding: 10px;
 }
 
@@ -60,5 +61,27 @@ header {
 }
 
 #question-result {
-    font-size: 50px;
+    font-size: 30px;
+    font-style: italic;
+}
+
+#welcome-page {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.btn {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+#endgame-end {
+    margin: 0 auto;
+    text-align: center;
 }
