@@ -179,7 +179,7 @@ function endQuiz() {
 }
 
 function storeLocal() {
-  localStorage.setItem("score" , correctCount);
+  localStorage.setItem("score", correctCount);
   localStorage.setItem("name", JSON.stringify(endInput.value));
 
 }
